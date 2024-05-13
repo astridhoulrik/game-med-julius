@@ -1,7 +1,31 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.x += 5
+    mySprite.x += direction
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    mySprite3.follow(mySprite)
+    mySprite.setImage(img`
+        . . . . f f f f f . . . . . . . 
+        . . . f e e e e e f . . . . . . 
+        . . f d d d d e e e f . . . . . 
+        . c d f d d f d e e f f . . . . 
+        . c d f d d f d e e d d f . . . 
+        c d e e d d d d e e b d c . . . 
+        c d d d d c d d e e b d c . f f 
+        c c c c c d d d e e f c . f e f 
+        . f d d d d d e e f f . . f e f 
+        . . f f f f f e e e e f . f e f 
+        . . . . f e e e e e e e f f e f 
+        . . . f e f f e f e e e e f f . 
+        . . . f e f f e f e e e e f . . 
+        . . . f d b f d b f f e f . . . 
+        . . . f d d c d d b b d f . . . 
+        . . . . f f f f f f f f f . . . 
+        `)
+    direction = -5
+})
+let mySprite3: Sprite = null
 let mySprite: Sprite = null
+let direction = 0
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -124,6 +148,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
+direction = 5
 mySprite = sprites.create(img`
     . . . . . . . f f f f f . . . . 
     . . . . . . f e e e e e f . . . 
@@ -162,3 +187,22 @@ let mySprite2 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Projectile)
 mySprite2.setPosition(138, 95)
+mySprite3 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . f . . 
+    . . . . . . . . . . . . . 5 . . 
+    . . . . . . . . . . . . 5 5 . . 
+    . . . . . . . . . . . 5 5 4 . . 
+    . . . . . . . . . . 5 5 5 . . . 
+    . . . . . . . . . 5 5 5 4 . . . 
+    . . . . . . . . 5 5 5 5 . . . . 
+    . . . . . . . 5 5 5 5 4 . . . . 
+    . . . . 5 5 5 5 5 4 4 . . . . . 
+    . . . . . 4 4 4 4 . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Food)
+mySprite3.setPosition(136, 93)
